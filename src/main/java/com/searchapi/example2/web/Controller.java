@@ -8,17 +8,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController("/api")
+@RestController
+@RequestMapping("/api")
 public class Controller {
 
     @Autowired
     private BlogService blogService;
 
+    @Autowired
+    private NewsService newsService;
 
-    @RequestMapping("/")
+
+    @GetMapping("/blog")
     public List<BlogDto> searchBlogByQuery(@RequestParam(name = "query", required=false) String query){
 
         return blogService.findByQuery("스프링부트");
+    }
+
+    @GetMapping("/news")
+    public List<BlogDto> searchNewsByQuery(){
+        return newsService.findByQuery("카카오");
     }
 
 }
